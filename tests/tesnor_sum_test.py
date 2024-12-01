@@ -12,7 +12,7 @@ def test_with_requires_grad_False():
     assert not b.grad
     assert b.data == 15.0
     assert b.requires_grad == False
-    assert len(b.parents) == 0
+    assert len(b.grad_fn) == 0
 
     a = torch.tensor([1, 2, 3, 4, 5])
     b = a.sum()
@@ -34,7 +34,7 @@ def test_without_passing_gradient_tensor_0():
     assert b.grad.data == 1.0
     assert b.data == 2.0
     assert b.requires_grad == True
-    assert len(b.parents) == 1
+    assert len(b.grad_fn) == 1
 
     a = torch.tensor(2.0, requires_grad=True)
     b = a.sum()
@@ -57,7 +57,7 @@ def test_without_passing_gradient_tensor_1():
     assert b.grad.data == 1.0
     assert b.data == 15.0
     assert b.requires_grad == True
-    assert len(b.parents) == 1
+    assert len(b.grad_fn) == 1
 
     a = torch.tensor([1.0, 2.0, 3.0, 4.0, 5.0], requires_grad=True)
     b = a.sum()
@@ -80,7 +80,7 @@ def test_with_passing_gradient_tensor_0():
     assert b.grad.data == 7.0
     assert b.data == 15.0
     assert b.requires_grad == True
-    assert len(b.parents) == 1
+    assert len(b.grad_fn) == 1
 
     a = torch.tensor([1.0, 2.0, 3.0, 4.0, 5.0], requires_grad=True)
     b = a.sum()
@@ -102,7 +102,7 @@ def test_with_passing_gradient_tensor_1():
     assert b.grad.data == 7.0
     assert b.data == 2.0
     assert b.requires_grad == True
-    assert len(b.parents) == 1
+    assert len(b.grad_fn) == 1
 
     a = torch.tensor(2.0, requires_grad=True)
     b = a.sum()

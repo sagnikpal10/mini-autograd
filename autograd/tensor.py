@@ -40,13 +40,10 @@ class Tensor(object):
             backward_grad = parent.gradient_function(grad_tensor)
             parent.tensor.backward(backward_grad)
     
-    def reset_grads_to_zero(self) -> None:
+    def zero_grad(self) -> None:
         '''setting the gradients of this tensor and all its child tensors to zero.'''
         if not self.requires_grad: return 
         self.grad = Tensor(np.zeros_like(self.data, dtype=np.float64))
-
-        for tensor in self.grad_fn:
-            tensor.zero_grad()
 
     # Defining all tensor operations
     def sum(self) -> 'Tensor':
@@ -167,3 +164,9 @@ class Tensor(object):
         return Tensor(data=self.data @ other.data,
                     requires_grad=self.requires_grad or other.requires_grad,
                     grad_fn=grad_functions)
+
+
+class Parameter(Tensor):
+    def __init__(self, data = None, *shape) -> None:
+        data = np.random.randn(*shape) if not data else data
+        super().__init__(data, requires_grad=True)

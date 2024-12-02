@@ -1,6 +1,6 @@
 import torch
-import pytest
 from autograd.tensor import Tensor
+from autograd.functions import exp, pow, sqrt, log, tanh
 
 def test_0():
     a = Tensor([[1, 2, 3], [4, 5, 6]], requires_grad=True)
@@ -52,3 +52,19 @@ def test_1():
     assert [[round(float(x), 3) for x in row] for row in b.grad.data.tolist()] == [[round(float(x), 3) for x in row] for row in b_.grad.data.tolist()]
     assert [[round(float(x), 3) for x in row] for row in d.grad.data.tolist()] == [[round(float(x), 3) for x in row] for row in d_.grad.data.tolist()]
     assert [[round(float(x), 3) for x in row] for row in f.grad.data.tolist()] == [[round(float(x), 3) for x in row] for row in f_.grad.data.tolist()]
+
+
+def test_2():
+    x = Tensor([[1, 2], [3, 4]], requires_grad=True)
+    y = exp(x)
+    z = tanh(y)
+    w = z.sum()
+    w.backward()
+
+    x_ = torch.tensor([[1.0, 2.0], [3.0, 4.0]], requires_grad=True)
+    y_ = torch.exp(x_)
+    z_ = torch.tanh(y_)
+    w_ = z_.sum()
+    w_.backward()
+
+    assert [[round(float(x), 6) for x in row] for row in x.grad.data.tolist()] == [[round(float(x), 6) for x in row] for row in x_.grad.tolist()]

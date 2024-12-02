@@ -35,7 +35,7 @@ def exp(parent: Tensor):
     )
     if parent.requires_grad:
         def grad_function(grad_tensor: 'Tensor') -> 'Tensor':
-            return Tensor(grad_tensor.data * parent.data)
+            return Tensor(grad_tensor.data * np.exp(parent.data))
         child_tensor.grad_fn = [GradDependency(tensor=parent, gradient_function=grad_function)]
 
     return child_tensor

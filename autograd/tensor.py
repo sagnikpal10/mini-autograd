@@ -132,7 +132,7 @@ class Tensor(object):
     def __rmul__(self, other) -> 'Tensor':
         return other * self
     
-    def _neg(self) -> 'Tensor':
+    def __neg__(self) -> 'Tensor':
         child_tensor = Tensor(
             data=-self.data,
             requires_grad = self.requires_grad,
@@ -164,9 +164,23 @@ class Tensor(object):
         return Tensor(data=self.data @ other.data,
                     requires_grad=self.requires_grad or other.requires_grad,
                     grad_fn=grad_functions)
+    
+    def __getitem__(self, idxs) -> 'Tensor':
+        child_tensor = Tensor(
+            data=self.data[idxs],
+            requires_grad = self.requires_grad,
+        )
+        if self.requires_grad:
+            def grad_fn(grad: 'Tensor') -> 'Tensor':
+                bigger_grad = Tensor(np.zeros_like(self.data[idxs]))
+                bigger_grad.data[idxs] = grad.data
+                return bigger_grad
+            child_tensor.grad_fn =[GradDependency(tensor=self, gradient_function=grad_fn)]
+
+        return child_tensor
 
 
 class Parameter(Tensor):
-    def __init__(self, data = None, *shape) -> None:
-        data = np.random.randn(*shape) if not data else data
+    def __init__(self, *shape) -> None:
+        data = np.random.randn(*shape)
         super().__init__(data, requires_grad=True)

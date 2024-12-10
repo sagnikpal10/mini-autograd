@@ -22,6 +22,7 @@ pytest -s
 #### In order to test the project you can individually run the *.ipynb files and see the implementation in action.
 
 #### Tensor Operations
+[Forward & Backward Pass](https://github.com/sagnikpal10/mini-autograd/blob/main/tensor-operations.ipynb)
 ```python3
 from autograd.tensor import Tensor
 from autograd.functions import pow
@@ -41,3 +42,29 @@ print("Forward Pass via custom autograd engine", result)
 print("Back-propagation dh/da (Project)", da)
 
 ```
+
+#### Minimizing a function using gradient descent
+[Minimizing a function](https://github.com/sagnikpal10/mini-autograd/blob/main/minimize-function.ipynb)
+```python3
+from autograd.tensor import Tensor
+import numpy as np
+
+x = Tensor([12, 0, 11, 5, 8, -9, 2], requires_grad=True) # initialization
+print(sum_of_squares(x).data)
+
+y_vals = []
+
+for i in range(20):
+    x.zero_grad()
+
+    y = sum_of_squares(x)
+    y.backward()
+
+    delta_x = Tensor(0.1) * x.grad
+    x = x - delta_x
+
+    y_vals.append(y.data)
+```
+
+#### Convergence of minimum
+![Minimization of sum_of_squares (Convergence Plot)](./images/minimizing-a-function.png)

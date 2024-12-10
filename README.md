@@ -2,7 +2,7 @@
 A mini deep learning library with an automatic differentiation engine for tensors. This library implements backpropagation over a dynamically constructed DAG, along with a lightweight neural networks module.
 
 ### Setup (Recommended to use Python version : 3.9.20)
-#### Step 1: It's recommended to use Python version 3.9.20. You can use [pyenv](https://github.com/pyenv/pyenv) to manage Python versions and virtual environments.
+#### Step 1: It's recommended to use Python version 3.9.20. You can use [pyenv](https://github.com/pyenv/pyenv) to manage Python versions and virtual environments. Note that you may also need to install [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv).
 
 #### Step 2: Create a virtual environment at the project root.
 ```bash

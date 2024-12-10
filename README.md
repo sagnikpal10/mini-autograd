@@ -1,7 +1,29 @@
 # mini-autograd
 A mini deep learning library with an automatic differentiation engine for tensors. This library implements backpropagation over a dynamically constructed DAG, along with a lightweight neural networks module.
 
-### Setup (Recommended to use Python version : 3.9.20)
+## Setup (Recommended to use Python version : 3.9.20)
+### Conda
+#### Step 1: Create a fresh conda environment with recommended python version
+```sh
+conda create -n mini-autograd python=3.9.20
+```
+
+#### Step 2: Activate the newly created environment
+```sh
+conda activate mini-autograd
+```
+
+#### Step 3: change directory to root directory of repository
+```sh
+cd /PATH/TO/mini-autograd
+```
+
+#### Step 4: Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Python virtual environment
 #### Step 1: It's recommended to use Python version 3.9.20. So please install Python 3.9.20 if it does not exist in your system aready.
 
 #### Step 2: Create a virtual environment at the project root.

@@ -67,7 +67,7 @@ for i in range(20):
 ```
 
 #### Convergence of minimum
-<img src="./images/minimizing-a-function.png" alt="Minimization of sum_of_squares (Convergence Plot)" width="200"/>
+<img src="./images/minimizing-a-function.png" alt="Minimization of sum_of_squares (Convergence Plot)" width="600"/>
 
 ### Training a neural netork
 [Simple Neural Network Training](https://github.com/sagnikpal10/mini-autograd/blob/main/neural-network-demo.ipynb)

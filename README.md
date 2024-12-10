@@ -18,3 +18,26 @@ pip install -r requirements.txt
 ```bash
 pytest -s
 ```
+
+#### In order to test the project you can individually run the *.ipynb files and see the implementation in action.
+
+#### Tensor Operations
+```python3
+from autograd.tensor import Tensor
+from autograd.functions import pow
+
+a = Tensor([[1, 2, 3], [4, 5, 6]], requires_grad=True)
+b = Tensor([[10, 20, 30], [41, 51, 61]], requires_grad=True)
+c = a + b
+d = Tensor([[1, 2, 1], [1, 1, 2]], requires_grad=True)
+e = c * d - a
+f = Tensor([[-1.0, 1.0], [2.0, -1.0], [-1.9, 1.0]], requires_grad=True)
+h = pow(e @ f, 2)
+h.backward(Tensor([[-1.0, 1.0], [2.0, -1.0]]))
+result = [[round(float(x), 3) for x in row ] for row in h.data]
+da = [[round(float(x), 3) for x in row ] for row in a.grad.data]
+
+print("Forward Pass via custom autograd engine", result)
+print("Back-propagation dh/da (Project)", da)
+
+```

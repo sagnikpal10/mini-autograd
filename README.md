@@ -14,12 +14,12 @@ python -m venv env
 source env/bin/activate
 ```
 
-#### Step 3: Install all dependencies needed.
+#### Step 4: Install all dependencies needed.
 ```bash
 pip install -r requirements.txt
 ```
 
-#### Step 4: Sanity Check (pytest)
+#### Step 5: Sanity Check (pytest)
 ```bash
 pytest -s
 ```

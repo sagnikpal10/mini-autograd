@@ -19,9 +19,9 @@ pip install -r requirements.txt
 pytest -s
 ```
 
-#### In order to test the project you can individually run the *.ipynb files and see the implementation in action.
+#### Note: In order to test the project you can individually run the *.ipynb files and see the implementation in action.
 
-#### Tensor Operations
+### Tensor Operations
 [Forward & Backward Pass](https://github.com/sagnikpal10/mini-autograd/blob/main/tensor-operations.ipynb)
 ```python3
 from autograd.tensor import Tensor
@@ -43,7 +43,7 @@ print("Back-propagation dh/da (Project)", da)
 
 ```
 
-#### Minimizing a function using gradient descent
+### Minimizing a function using gradient descent
 [Minimizing a function](https://github.com/sagnikpal10/mini-autograd/blob/main/minimize-function.ipynb)
 ```python3
 from autograd.tensor import Tensor
@@ -67,4 +67,24 @@ for i in range(20):
 ```
 
 #### Convergence of minimum
-![Minimization of sum_of_squares (Convergence Plot)](./images/minimizing-a-function.png)
+<img src="./images/minimizing-a-function.png" alt="Minimization of sum_of_squares (Convergence Plot)" width="200"/>
+
+### Training a neural netork
+[Simple Neural Network Training](https://github.com/sagnikpal10/mini-autograd/blob/main/neural-network-demo.ipynb)
+```python3
+from autograd.tensor import Tensor, Parameter
+from nn.optimizer import SGD
+from nn.module import Module
+
+class Model(Module):
+    def __init__(self) -> None:
+        self.w = Parameter(3)
+        self.b = Parameter()
+
+    def predict(self, inputs: Tensor) -> Tensor:
+        return inputs @ self.w + self.b
+
+optimizer = SGD(lr=0.001)
+batch_size = 32
+model = Model()
+```
